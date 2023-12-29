@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser - Results</title>
+    <style>
+        body {
+            font-family: 'Lucida Grande', monospace;
+            font-size: 15px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Resume Parser</h1>
+    <a href="{{ url_for('submit') }}">Submit Resumes</a>
+    <p>---------------------------------------------------------------</p>
+
+    <h2>Results</h2>
+    <table>
+        <tr>
+            <th>Score</th>
+            <th>Filepath</th>
+            <th>Keywords</th>
+            <th>Matches</th>
+        </tr>
+        {% for result in results.split('\n') %}
+            {% if result %}
+                {% set parts = result.split('\t\t\n\t') %}
+                <tr>
+                    <td>{{ parts[0] | float * 100 }}%</td>
+                    <td>{{ parts[1] }}</td>
+                    <td>{{ parts[2] }}</td>
+                    <td>{{ parts[3] }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

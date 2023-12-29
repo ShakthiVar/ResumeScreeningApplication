@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser - Submit</title>
+    <style>
+        body {
+            font-family: 'Lucida Grande', monospace;
+            font-size: 15px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        input[type="text"],
+        input[type="submit"],
+        input[type="file"] {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        p {
+            color: #777;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Resume Screening Web Application</h1>
+    <p>---------------------------------------------------------------</p>
+
+    <h2>Step 1: Enter Keywords</h2>
+    <p>Enter individually or as a space-separated list.</p>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="kw" />
+        <input type="submit" value="Submit" />
+    </form>
+
+    <h4>Keywords</h4>
+    <!-- <ul>
+            {% for word in keywords %}
+                <li><input type='hidden'>{{ word }}</li>
+            {% endfor %}
+        </ul> -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="submit" name="r" value="Reset" />
+    </form>
+
+    <p>---------------------------------------------------------------</p>
+    <h2>Step 2: Upload Resume (.pdf only)</h2>
+    <form method='POST' enctype='multipart/form-data'>
+        {{ form.hidden_tag() }}
+        {{ form.file() }}
+        {{ form.submit() }}
+        <p>{{ uploadResult }}</p>
+    </form>
+
+    <p>---------------------------------------------------------------</p>
+    <h2>Step 3: Parse and Score Resume</h2>
+    <form method='POST' enctype='multipart/form-data'>
+        <button type="submit" name="p">Parse</button>
+        <p>{{ errorMessage }}</p>
+        <p>{{ scoreMessage }}</p>
+        
+    </form>
+
+</body>
+<br><br><br>
+
+</html>
